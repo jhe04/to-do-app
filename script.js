@@ -1,7 +1,4 @@
-// clicking on a task allows you to toggle between checked/unchecked
-
 const formElement = document.querySelector("form");
-console.log(formElement);
 
 //add a submit event listener on the form
 formElement.addEventListener("submit", function (e) {
@@ -16,11 +13,9 @@ formElement.addEventListener("submit", function (e) {
     const liElement = document.createElement("li");
     // create box icon
     liElement.innerHTML = `<i class="fa-regular fa-square"></i>`;
-    console.log(liElement);
 
     // create text node
     const toDoContent = document.createTextNode(inputElement.value);
-    console.log(toDoContent);
 
     liElement.appendChild(toDoContent);
     // add li element to the ul
@@ -35,6 +30,12 @@ formElement.addEventListener("submit", function (e) {
 });
 
 // eventListener for our 'li' using event propagation
-document.querySelector('ul').addEventListener("click", function () {
-    console.log(`you've clicked this box`);
+document.querySelector("ul").addEventListener("click", function (e) {
+  // check we're specifically clicking on the checkbox
+  if (e.target.nodeName === "I") {
+    // toggle between checked/unchecked
+    e.target.classList.toggle("fa-square");
+    e.target.classList.toggle("fa-square-check");
+    e.target.parentElement.classList.toggle("text-muted");
+  }
 });
